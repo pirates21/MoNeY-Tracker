@@ -58,6 +58,7 @@ public class tracker extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,7 +111,7 @@ public class tracker extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton1);
-        jButton1.setBounds(400, 200, 100, 40);
+        jButton1.setBounds(390, 200, 100, 40);
 
         jButton2.setBackground(new java.awt.Color(51, 204, 0));
         jButton2.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
@@ -121,7 +122,7 @@ public class tracker extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton2);
-        jButton2.setBounds(390, 360, 140, 40);
+        jButton2.setBounds(360, 360, 120, 40);
 
         jButton3.setBackground(new java.awt.Color(51, 204, 0));
         jButton3.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
@@ -132,18 +133,18 @@ public class tracker extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton3);
-        jButton3.setBounds(560, 360, 200, 40);
+        jButton3.setBounds(490, 360, 180, 40);
 
         jButton4.setBackground(new java.awt.Color(51, 204, 0));
         jButton4.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
-        jButton4.setText("Refresh");
+        jButton4.setText("REFRESH");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
         jPanel2.add(jButton4);
-        jButton4.setBounds(670, 200, 100, 40);
+        jButton4.setBounds(670, 200, 120, 40);
 
         jLabel6.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
         jLabel6.setText("Serial No.");
@@ -153,14 +154,14 @@ public class tracker extends javax.swing.JFrame {
         jTextField2.setEditable(false);
         jTextField2.setText("1");
         jPanel2.add(jTextField2);
-        jTextField2.setBounds(510, 30, 180, 30);
+        jTextField2.setBounds(560, 30, 180, 30);
 
         jLabel7.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
         jLabel7.setText("Item Name");
         jPanel2.add(jLabel7);
         jLabel7.setBounds(400, 80, 90, 30);
         jPanel2.add(jTextField3);
-        jTextField3.setBounds(510, 80, 180, 30);
+        jTextField3.setBounds(560, 80, 180, 30);
 
         jLabel8.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
         jLabel8.setText("Price");
@@ -169,7 +170,7 @@ public class tracker extends javax.swing.JFrame {
 
         jTextField4.setToolTipText("Can't Be Null");
         jPanel2.add(jTextField4);
-        jTextField4.setBounds(510, 130, 180, 30);
+        jTextField4.setBounds(560, 130, 180, 30);
 
         jLabel9.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
         jLabel9.setText("Remaining Amount");
@@ -185,7 +186,7 @@ public class tracker extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton5);
-        jButton5.setBounds(540, 200, 100, 40);
+        jButton5.setBounds(530, 200, 100, 40);
         jPanel2.add(jLabel1);
         jLabel1.setBounds(590, 270, 160, 30);
         jPanel2.add(jLabel2);
@@ -196,6 +197,17 @@ public class tracker extends javax.swing.JFrame {
         jPanel2.add(jLabel10);
         jLabel10.setBounds(390, 270, 160, 30);
 
+        jButton6.setBackground(new java.awt.Color(51, 204, 0));
+        jButton6.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
+        jButton6.setText("RESET ALL");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton6);
+        jButton6.setBounds(680, 360, 130, 40);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -203,7 +215,7 @@ public class tracker extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 783, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 832, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -277,12 +289,16 @@ public class tracker extends javax.swing.JFrame {
            String sum=rs.getString("sum(Price)");
           double sum1= Double.parseDouble(sum);
           minus=sam-sum1;
-          if(minus>0){
+          if(minus>0)
+          {
             jLabel2.setText(Double.toString(minus));
-            }}
-            else
-            {JOptionPane.showMessageDialog(this, "yyy");
             }
+          else
+            {
+                JOptionPane.showMessageDialog(this, "Not Acceptable");
+            }
+            }
+            
 
         }
         catch(Exception e)
@@ -331,6 +347,7 @@ catch (Exception e) {
         String Price= jTextField4.getText();
        double sam=Double.parseDouble(jLabel1.getText());
        double minus;
+       int sn=Integer.parseInt(jTextField2.getText());
         String IName= jTextField3.getText();
        
         
@@ -342,6 +359,10 @@ catch (Exception e) {
             Statement stmt = (Statement) con.createStatement();
 String query = "DELETE FROM item WHERE IName='"+IName+"' AND Price='"+Price+"';";
           stmt.executeUpdate(query);
+          sn--;
+          jTextField2.setText(sn+"");
+          jTextField3.setText("");
+          jTextField4.setText("");
            JOptionPane.showMessageDialog(this,"To View Changes Please Click Refresh");
         }
         catch(Exception e)
@@ -362,6 +383,7 @@ String query = "DELETE FROM item WHERE IName='"+IName+"' AND Price='"+Price+"';"
           double sum1= Double.parseDouble(sum);
           minus=sam-sum1;
             jLabel2.setText(Double.toString(minus));
+            
             }
 
         }
@@ -373,7 +395,8 @@ String query = "DELETE FROM item WHERE IName='"+IName+"' AND Price='"+Price+"';"
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-DefaultTableModel model = (DefaultTableModel)
+
+  DefaultTableModel model = (DefaultTableModel)
 jTable1.getModel();
 
 int rows=model.getRowCount();
@@ -382,6 +405,7 @@ if (rows>0)
 for (int i=0; i<rows; i++)
 model.removeRow(0); 
 }
+
 try
 {
 Class.forName("java.sql.DriverManager");
@@ -395,14 +419,15 @@ ResultSet rs = stmt.executeQuery(query);
 while(rs.next())
 {
 String SNo = rs.getString("SNo");
-String IName = rs.getString("IName");
-String Price = rs.getString("price");
-model.addRow (new Object[] {SNo, IName,Price});
+String Iname = rs.getString("Iname");
+String price = rs.getString("price");
+model.addRow (new Object[] {SNo, Iname,price});
 }     
 }
 catch (Exception e) {
             JOptionPane.showMessageDialog(this,e.getMessage());
-        }     
+        
+}
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -424,6 +449,37 @@ else{
     JOptionPane.showMessageDialog(this,"Don't Buy It");
 }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+DefaultTableModel model = (DefaultTableModel)
+jTable1.getModel();
+jTextField2.setText("1");
+int rows=model.getRowCount();
+if (rows>0)
+{
+for (int i=0; i<rows; i++)
+model.removeRow(0); 
+}
+
+try
+{
+Class.forName("java.sql.DriverManager");
+Connection con = (Connection)
+DriverManager.getConnection
+("jdbc:mysql://localhost:3306/mtracker",
+"root", "1234");
+Statement stmt = (Statement) con.createStatement();
+String query="DELETE FROM item;";
+stmt.executeUpdate(query);
+   
+}
+catch (Exception e) {
+            JOptionPane.showMessageDialog(this,e.getMessage());
+        
+}
+double asd =Double.parseDouble(jLabel1.getText());
+jLabel2.setText(Double.toString(asd));
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -466,6 +522,7 @@ else{
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

@@ -40,7 +40,6 @@ public class signup extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel8 = new javax.swing.JLabel();
@@ -50,6 +49,7 @@ public class signup extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPasswordField2 = new javax.swing.JPasswordField();
+        jPasswordField3 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sign Up");
@@ -70,7 +70,7 @@ public class signup extends javax.swing.JFrame {
         jPanel2.add(jLabel2);
         jLabel2.setBounds(30, 90, 160, 160);
 
-        jLabel7.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
         jLabel7.setText("Name");
         jPanel2.add(jLabel7);
         jLabel7.setBounds(230, 90, 110, 30);
@@ -78,10 +78,6 @@ public class signup extends javax.swing.JFrame {
         jTextField1.setToolTipText("");
         jPanel2.add(jTextField1);
         jTextField1.setBounds(380, 90, 170, 30);
-
-        jTextField3.setToolTipText("Required to change password and shoud not exceed 4 digits");
-        jPanel2.add(jTextField3);
-        jTextField3.setBounds(380, 240, 170, 30);
 
         jTextField4.setToolTipText("Must not be greater than 10 Alphabets");
         jPanel2.add(jTextField4);
@@ -91,26 +87,27 @@ public class signup extends javax.swing.JFrame {
         jPanel2.add(jPasswordField1);
         jPasswordField1.setBounds(380, 190, 170, 30);
 
-        jLabel8.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
         jLabel8.setText("Password");
         jPanel2.add(jLabel8);
         jLabel8.setBounds(230, 140, 110, 30);
 
-        jLabel9.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
         jLabel9.setText("Confirm Password");
         jPanel2.add(jLabel9);
-        jLabel9.setBounds(230, 190, 130, 30);
+        jLabel9.setBounds(230, 190, 150, 30);
 
-        jLabel10.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 14)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
         jLabel10.setText("Security Pin");
         jPanel2.add(jLabel10);
         jLabel10.setBounds(230, 240, 110, 30);
 
-        jLabel12.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 14)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
         jLabel12.setText("Username");
         jPanel2.add(jLabel12);
         jLabel12.setBounds(230, 40, 110, 30);
 
+        jButton1.setBackground(new java.awt.Color(51, 204, 0));
         jButton1.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
         jButton1.setText("Confirm");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +118,7 @@ public class signup extends javax.swing.JFrame {
         jPanel2.add(jButton1);
         jButton1.setBounds(333, 320, 110, 31);
 
+        jButton2.setBackground(new java.awt.Color(51, 204, 0));
         jButton2.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
         jButton2.setText("Close");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -134,6 +132,8 @@ public class signup extends javax.swing.JFrame {
         jPasswordField2.setToolTipText("Must not exceed 8 characters");
         jPanel2.add(jPasswordField2);
         jPasswordField2.setBounds(380, 140, 170, 30);
+        jPanel2.add(jPasswordField3);
+        jPasswordField3.setBounds(380, 240, 170, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,9 +163,14 @@ lg.show();
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String Username= jTextField4.getText();
         String Name= jTextField1.getText();
-        String Spin= jTextField3.getText();
+        String Spin= jPasswordField3.getText();
         String Password= jPasswordField2.getText();
-        
+        if(Username.isEmpty() || Spin.isEmpty() || Password.isEmpty())
+        {
+            JOptionPane.showMessageDialog(this,"Username or Password or Security Pin Can't Be Empty");
+        }
+        else
+        {
         try{
             Class.forName("java.sql.DriverManager");
             Connection con = (Connection)
@@ -188,7 +193,8 @@ lg.show();
         
 login1 lg=new login1();
 lg.show();
-dispose();// TODO add your handling code here:
+dispose();
+        }// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -241,8 +247,8 @@ dispose();// TODO add your handling code here:
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JPasswordField jPasswordField3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }

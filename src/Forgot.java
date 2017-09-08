@@ -40,9 +40,10 @@ public class Forgot extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jPasswordField2 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Forget Password");
@@ -56,29 +57,28 @@ public class Forgot extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(60, -10, 500, 310);
 
-        jLabel2.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
         jLabel2.setText("Security Pin");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(130, 310, 140, 40);
 
-        jLabel3.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
         jLabel3.setText("New Password");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(130, 360, 140, 40);
 
-        jLabel4.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
         jLabel4.setText("UserName");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(130, 260, 140, 40);
         jPanel1.add(jTextField1);
         jTextField1.setBounds(330, 260, 260, 30);
-        jPanel1.add(jTextField2);
-        jTextField2.setBounds(330, 310, 260, 30);
         jPanel1.add(jPasswordField1);
         jPasswordField1.setBounds(330, 360, 260, 30);
 
+        jButton1.setBackground(new java.awt.Color(51, 204, 0));
         jButton1.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
-        jButton1.setText("Confirm");
+        jButton1.setText("CONFIRM");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -86,6 +86,12 @@ public class Forgot extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1);
         jButton1.setBounds(460, 440, 130, 40);
+
+        jLabel5.setEnabled(false);
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(130, 450, 120, 30);
+        jPanel1.add(jPasswordField2);
+        jPasswordField2.setBounds(330, 310, 260, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,9 +109,18 @@ public class Forgot extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
   String Username= jTextField1.getText();
-  String Spin = jTextField2.getText();
+  String Fpin = jPasswordField2.getText();
         String Password= jPasswordField1.getText();
+        String pin;
         
+        
+        jLabel5.setVisible(false);
+        if(Username.isEmpty() || Fpin.isEmpty() || Password.isEmpty())
+        {
+            JOptionPane.showMessageDialog(this,"Username or Password or Security Pin Can't Be Empty");
+        }
+        else
+        {
         try{
             Class.forName("java.sql.DriverManager");
             Connection con = (Connection)
@@ -114,15 +129,25 @@ public class Forgot extends javax.swing.JFrame {
             Statement stmt = (Statement) con.createStatement();
             String query = "Select Spin From Signup Where Username="
                     + "('"+Username+"');";
-               stmt.executeUpdate(query);
-            if( query.equals(Spin)){
+               ResultSet rs = stmt.executeQuery(query);
+while(rs.next())
+{
+String Spin = rs.getString("Spin");
+jLabel5.setText(Spin);
+}
+pin=jLabel5.getText();
+            if( Fpin.equals(pin)){
              String query1 = "Update Signup set Password =('"+Password+"') WHERE"
                      + " Username=" + "('"+Username+"') ;";
             stmt.executeUpdate(query1);
+            JOptionPane.showMessageDialog(this, "Password Successfully Changed");
+            dispose();
+            login1 lg=new login1();
+            lg.show();
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "Username And Spin Don't Match");
+                JOptionPane.showMessageDialog(null, "Username And Security Pin Don't Match");
             }
             
         }
@@ -133,9 +158,10 @@ public class Forgot extends javax.swing.JFrame {
                     }   
         
         
-        login1 lg=new login1();
-lg.show();
-dispose();// TODO add your handling code here:
+        
+
+
+        }// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -180,9 +206,10 @@ dispose();// TODO add your handling code here:
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
