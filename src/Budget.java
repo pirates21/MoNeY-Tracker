@@ -1,3 +1,9 @@
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
+import java.sql.DriverManager;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -34,6 +40,9 @@ public class Budget extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -57,14 +66,45 @@ public class Budget extends javax.swing.JFrame {
         jPanel2.add(jLabel4);
         jLabel4.setBounds(280, 100, 90, 30);
         jPanel2.add(jTextField1);
-        jTextField1.setBounds(390, 160, 150, 30);
+        jTextField1.setBounds(390, 160, 180, 30);
         jPanel2.add(jTextField2);
-        jTextField2.setBounds(390, 100, 150, 30);
+        jTextField2.setBounds(390, 100, 180, 30);
 
         jButton1.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
-        jButton1.setText("Next");
+        jButton1.setText("Spendable Amount");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton1);
-        jButton1.setBounds(420, 260, 110, 40);
+        jButton1.setBounds(320, 220, 190, 40);
+
+        jButton2.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
+        jButton2.setText("Next");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton2);
+        jButton2.setBounds(470, 290, 110, 40);
+
+        jLabel5.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
+        jLabel5.setText("Spendable Amount");
+        jLabel5.setEnabled(false);
+        jPanel2.add(jLabel5);
+        jLabel5.setBounds(100, 300, 150, 30);
+
+        jTextField3.setEditable(false);
+        jTextField3.setEnabled(false);
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jTextField3);
+        jTextField3.setBounds(270, 300, 150, 30);
 
         jPanel3.setBackground(new java.awt.Color(102, 0, 204));
         jPanel3.setLayout(null);
@@ -91,6 +131,58 @@ public class Budget extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+double budget = Double.parseDouble(jTextField2.getText());
+double Savings = Double.parseDouble(jTextField1.getText());
+double Remaining;
+if(budget<0 || Savings<0){
+    JOptionPane.showMessageDialog(this,"Wrong Amount");
+}
+else{
+Remaining = budget - Savings;
+
+jTextField3.setEnabled(true);
+jLabel5.setEnabled(true);
+jTextField3.setText(Double.toString(Remaining));
+}
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       
+        String budget= jTextField2.getText();
+        String Savings= jTextField1.getText();
+        double Remaining= Double.parseDouble(jTextField3.getText());
+        
+        if(Remaining<0)
+        {
+            JOptionPane.showMessageDialog(this, "Savings Can't Be Greater Than Budget");
+           
+        }
+        else{
+        try{
+            Class.forName("java.sql.DriverManager");
+            Connection con = (Connection)
+           DriverManager.getConnection("jdbc:mysql://localhost:3306/mtracker",
+            "root", "1234");
+            Statement stmt = (Statement) con.createStatement();
+            String query = "INSERT INTO amount VALUES('"+budget+"','"+Savings+"',"
+                    + "'"+Remaining+"');";
+          stmt.executeUpdate(query);
+           
+        }
+        catch(Exception e)
+                    {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    }   
+         new tracker(Remaining).setVisible(true);
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+// TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,13 +222,16 @@ public class Budget extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

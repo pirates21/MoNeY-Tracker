@@ -79,13 +79,18 @@ public class main extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
         jButton1.setText("ADD");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton1);
         jButton1.setBounds(500, 50, 100, 40);
 
         jButton2.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
         jButton2.setText("GET HELP");
         jPanel2.add(jButton2);
-        jButton2.setBounds(510, 290, 140, 40);
+        jButton2.setBounds(490, 290, 140, 40);
 
         jLabel1.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
         jPanel2.add(jLabel1);
@@ -125,6 +130,10 @@ public class main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

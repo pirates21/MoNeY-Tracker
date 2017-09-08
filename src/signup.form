@@ -117,7 +117,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField3">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Required to change password and shoud not increase 4 digits"/>
+            <Property name="toolTipText" type="java.lang.String" value="Required to change password and shoud not exceed 4 digits"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -137,7 +137,7 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="jPasswordField1">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Should match Above"/>
+            <Property name="toolTipText" type="java.lang.String" value="Same As Above Password"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -231,7 +231,7 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="jPasswordField2">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Must not be greater than 8 Digits"/>
+            <Property name="toolTipText" type="java.lang.String" value="Must not exceed 8 characters"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

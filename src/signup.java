@@ -1,3 +1,10 @@
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -72,7 +79,7 @@ public class signup extends javax.swing.JFrame {
         jPanel2.add(jTextField1);
         jTextField1.setBounds(380, 90, 170, 30);
 
-        jTextField3.setToolTipText("Required to change password and shoud not increase 4 digits");
+        jTextField3.setToolTipText("Required to change password and shoud not exceed 4 digits");
         jPanel2.add(jTextField3);
         jTextField3.setBounds(380, 240, 170, 30);
 
@@ -80,7 +87,7 @@ public class signup extends javax.swing.JFrame {
         jPanel2.add(jTextField4);
         jTextField4.setBounds(380, 40, 170, 30);
 
-        jPasswordField1.setToolTipText("Should match Above");
+        jPasswordField1.setToolTipText("Same As Above Password");
         jPanel2.add(jPasswordField1);
         jPasswordField1.setBounds(380, 190, 170, 30);
 
@@ -124,7 +131,7 @@ public class signup extends javax.swing.JFrame {
         jPanel2.add(jButton2);
         jButton2.setBounds(490, 320, 90, 31);
 
-        jPasswordField2.setToolTipText("Must not be greater than 8 Digits");
+        jPasswordField2.setToolTipText("Must not exceed 8 characters");
         jPanel2.add(jPasswordField2);
         jPasswordField2.setBounds(380, 140, 170, 30);
 
@@ -154,6 +161,31 @@ lg.show();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String Username= jTextField4.getText();
+        String Name= jTextField1.getText();
+        String Spin= jTextField3.getText();
+        String Password= jPasswordField2.getText();
+        
+        try{
+            Class.forName("java.sql.DriverManager");
+            Connection con = (Connection)
+           DriverManager.getConnection("jdbc:mysql://localhost:3306/mtracker",
+            "root", "1234");
+            Statement stmt = (Statement) con.createStatement();
+            String query = "INSERT INTO signup VALUES('"+Name+"','"+Username+"',"
+                    + "'"+Password+"','"+Spin+"');";
+          stmt.executeUpdate(query);
+           
+        }
+        catch(Exception e)
+                    {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    }   
+     
+        
+        
+        
+        
 login1 lg=new login1();
 lg.show();
 dispose();// TODO add your handling code here:
